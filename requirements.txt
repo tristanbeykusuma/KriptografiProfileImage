@@ -3,7 +3,7 @@ pandas
 numpy
 hashlib
 PIL
-Crypto
 pycryptodome
 deta
-streamlit_authenticator
+Pillow
+streamlit_authenticator==0.1.*

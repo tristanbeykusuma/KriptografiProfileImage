@@ -19,6 +19,7 @@ import base64
 import hashlib
 import os
 import io
+import time
 from PIL import Image
 import numpy as np
 import streamlit_authenticator as stauth
@@ -98,10 +99,6 @@ def embed_encrypted_data_into_image(encrypted_data, width, height):
 
 users = fetch_all_users()
 
-
-placeholder = st.empty()
-placeholder.info("username pparker password abc123")
-
 usernames = [user["key"] for user in users]
 names = [user["name"] for user in users]
 hashed_passwords = [user["password"] for user in users]
@@ -124,6 +121,7 @@ if authentication_status:
 
     # If user attempts to upload a file.
     if uploaded_file is not None:
+        start_time = time.time()
         user_provided_seed='test'
         bytes_data = uploaded_file.getvalue()
         with open(uploaded_file.name, mode='wb') as w:
@@ -141,6 +139,10 @@ if authentication_status:
         embedded_image = embed_encrypted_data_into_image(encrypted_data, width, height)
         saved_image_name='embedded_image_'+uploaded_file.name+'.png'
         embedded_image.save(saved_image_name)
+        finish_time = time.time()
+        time_difference = finish_time - start_time
         insert_image(saved_image_name,f"{uploaded_file.name}_key.bin", username)
         st.write(f'filename: {uploaded_file.name}')
         st.image(bytes_data)
+        st.write(embedded_image.size)
+        st.write(time_difference)

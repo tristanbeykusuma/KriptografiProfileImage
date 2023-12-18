@@ -80,9 +80,6 @@ def decrypt_image(encrypted_data, key):
 
 users = fetch_all_users()
 
-placeholder = st.empty()
-placeholder.info("username pparker password abc123")
-
 usernames = [user["key"] for user in users]
 names = [user["name"] for user in users]
 hashed_passwords = [user["password"] for user in users]
