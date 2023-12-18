@@ -1,0 +1,9 @@
+streamlit
+pandas
+numpy
+hashlib
+PIL
+Crypto
+pycryptodome
+deta
+streamlit_authenticator
